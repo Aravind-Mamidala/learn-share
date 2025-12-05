@@ -7,6 +7,10 @@ export const API_BASE = `${API_BASE_URL}/api`; // ✅ must include /api
 // Create axios instance with base URL and auth interceptor
 export const api = axios.create({
   baseURL: API_BASE,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 // Add auth token to requests
@@ -18,9 +22,30 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Add response interceptor for better error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      // Server responded with error
+      return Promise.reject(error);
+    } else if (error.request) {
+      // Request made but no response (network error)
+      console.error("Network error:", error.request);
+      return Promise.reject(
+        new Error("Network error. Please check your connection.")
+      );
+    } else {
+      // Something else happened
+      console.error("Error:", error.message);
+      return Promise.reject(error);
+    }
+  }
+);
+
 // Auth APIs
-export const loginUser = (data) => axios.post(`${API_BASE}/auth/login`, data);
-export const signupUser = (data) => axios.post(`${API_BASE}/auth/signup`, data);
+export const loginUser = (data) => api.post(`/auth/login`, data);
+export const signupUser = (data) => api.post(`/auth/signup`, data);
 
 // User APIs
 export const fetchUser = (userId) => api.get(`/users/${userId}`);

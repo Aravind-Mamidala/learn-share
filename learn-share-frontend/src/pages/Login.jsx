@@ -19,16 +19,25 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setMessage(""); // Clear previous messages
     try {
       const res = await loginUser({ email, password });
 
       // 🔥 FIXED: use res instead of response, and correct argument order
-      login(res.data.user, res.data.token);
-
-      setMessage(res.data.message || "Login successful!");
-      setTimeout(() => navigate("/"), 1000);
+      if (res.data && res.data.user && res.data.token) {
+        login(res.data.user, res.data.token);
+        setMessage(res.data.message || "Login successful!");
+        setTimeout(() => navigate("/"), 1000);
+      } else {
+        setMessage("Invalid response from server");
+      }
     } catch (err) {
-      setMessage(err.response?.data?.message || "Login failed");
+      console.error("Login error:", err);
+      const errorMessage =
+        err.response?.data?.message ||
+        err.message ||
+        "Login failed. Please check your credentials.";
+      setMessage(errorMessage);
     }
   };
 
