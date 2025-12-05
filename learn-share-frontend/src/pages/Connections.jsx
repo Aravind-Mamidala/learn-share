@@ -104,19 +104,19 @@ const Connections = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
                 Your Learning Network 👥
               </h1>
-              <p className="text-gray-600 text-lg">
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg">
                 Connect and learn with teachers and fellow students
               </p>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden sm:block">
               <div className="text-right">
                 <p className="text-sm text-gray-500">Active Connections</p>
                 <p className="text-lg font-semibold text-gray-900">
@@ -128,26 +128,26 @@ const Connections = () => {
         </div>
 
         {/* Search and Filter */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
+          <div className="flex flex-col md:flex-row gap-3 sm:gap-4">
             <div className="flex-1">
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search connections by name or subject..."
+                  placeholder="Search connections..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base"
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <span className="text-gray-400">🔍</span>
                 </div>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setFilterMode("all")}
-                className={`px-4 py-3 rounded-lg font-medium transition-colors ${
+                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-medium transition-colors text-xs sm:text-sm ${
                   filterMode === "all"
                     ? "bg-purple-600 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -157,7 +157,7 @@ const Connections = () => {
               </button>
               <button
                 onClick={() => setFilterMode("online")}
-                className={`px-4 py-3 rounded-lg font-medium transition-colors ${
+                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-medium transition-colors text-xs sm:text-sm ${
                   filterMode === "online"
                     ? "bg-green-600 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -167,7 +167,7 @@ const Connections = () => {
               </button>
               <button
                 onClick={() => setFilterMode("offline")}
-                className={`px-4 py-3 rounded-lg font-medium transition-colors ${
+                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-medium transition-colors text-xs sm:text-sm ${
                   filterMode === "offline"
                     ? "bg-gray-600 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -197,11 +197,11 @@ const Connections = () => {
                   key={connection._id || index}
                   className="p-6 hover:bg-gray-50 transition-colors"
                 >
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 gap-3 sm:gap-0">
                     {/* Avatar */}
-                    <div className="relative">
+                    <div className="relative flex-shrink-0">
                       <div
-                        className={`w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold ${
+                        className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-white text-lg sm:text-xl font-bold ${
                           connection.type === "teacher"
                             ? "bg-gradient-to-r from-green-500 to-blue-500"
                             : "bg-gradient-to-r from-purple-500 to-pink-500"
@@ -216,8 +216,8 @@ const Connections = () => {
 
                     {/* Connection Info */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <h3 className="text-lg font-semibold text-gray-900 truncate">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 truncate">
                           {connection.name}
                         </h3>
                         <span
@@ -242,21 +242,21 @@ const Connections = () => {
                     </div>
 
                     {/* Time and Actions */}
-                    <div className="flex flex-col items-end space-y-2">
-                      <span className="text-xs text-gray-500">
+                    <div className="flex flex-row sm:flex-col sm:items-end justify-between sm:justify-end gap-2 sm:space-y-2">
+                      <span className="text-xs text-gray-500 sm:order-1">
                         {formatLastMessageTime(connection.lastMessageTime)}
                       </span>
-                      <div className="flex space-x-2">
+                      <div className="flex gap-2 sm:order-2">
                         <Link
                           to={`/chat/${connection._id}`}
-                          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors"
+                          className="bg-blue-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 text-xs sm:text-sm font-medium transition-colors"
                         >
                           Chat
                         </Link>
                         {connection.type === "teacher" && (
                           <Link
                             to={`/teacher/${connection._id}`}
-                            className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 text-sm font-medium transition-colors"
+                            className="bg-gray-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-gray-700 text-xs sm:text-sm font-medium transition-colors"
                           >
                             Profile
                           </Link>
@@ -300,7 +300,7 @@ const Connections = () => {
 
         {/* Quick Stats */}
         {connections.length > 0 && (
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div className="bg-white rounded-xl shadow-lg p-6 text-center">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-green-600 text-xl">👨‍🏫</span>

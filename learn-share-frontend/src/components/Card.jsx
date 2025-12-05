@@ -9,9 +9,9 @@ function Card({ image, title, onClick }) {
       <img
         src={image}
         alt={title}
-        className="w-full h-40 object-cover"
+        className="w-full h-32 sm:h-40 object-cover"
       />
-      <div className="absolute bottom-0 bg-black bg-opacity-50 w-full text-white text-center py-2 font-semibold">
+      <div className="absolute bottom-0 bg-black bg-opacity-50 w-full text-white text-center py-1.5 sm:py-2 font-semibold text-sm sm:text-base">
         {title}
       </div>
     </div>

@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const API_BASE = "http://localhost:5001/api"; // ✅ must include /api
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+export const API_BASE = `${API_BASE_URL}/api`; // ✅ must include /api
 
 // Create axios instance with base URL and auth interceptor
 export const api = axios.create({

@@ -2,7 +2,7 @@ import express from "express";
 import Complaint from "../models/Complaint.js";
 import User from "../models/User.js";
 import nodemailer from "nodemailer";
-import { adminAuth, authenticateUser } from "../middleware/adminAuth.js";
+import { adminAuth } from "../middleware/adminAuth.js";
 
 const router = express.Router();
 
@@ -167,8 +167,9 @@ router.post("/submit", async (req, res) => {
     // Check if users are connected (only connected users can report each other)
     // Skip this check for admin users
     if (complainant.role !== "admin") {
-      const isConnected = complainant.connections.includes(reportedUserId) ||
-                         reportedUser.connections.includes(complainantId);
+      const isConnected =
+        complainant.connections.includes(reportedUserId) ||
+        reportedUser.connections.includes(complainantId);
 
       if (!isConnected) {
         return res.status(400).json({

@@ -24,7 +24,9 @@ export default function TeacherProfile() {
   // ✅ Fetch teacher details
   const fetchTeacher = async () => {
     try {
-      const res = await fetch(`http://localhost:5001/api/user/${teacherId}`);
+      const API_BASE_URL =
+        import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+      const res = await fetch(`${API_BASE_URL}/api/user/${teacherId}`);
       const data = await res.json();
       setTeacher(data);
     } catch (err) {
@@ -145,14 +147,16 @@ export default function TeacherProfile() {
 
   // ✅ UI
   return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <div className="bg-white shadow-lg rounded-2xl p-6">
-        <h2 className="text-2xl font-bold mb-2">{teacher.name}</h2>
-        <p className="text-gray-600 mb-2">{teacher.email}</p>
-        <p className="text-sm text-blue-600 mb-2 capitalize">
+    <div className="p-3 sm:p-4 md:p-6 max-w-3xl mx-auto">
+      <div className="bg-white shadow-lg rounded-xl sm:rounded-2xl p-4 sm:p-6">
+        <h2 className="text-xl sm:text-2xl font-bold mb-2">{teacher.name}</h2>
+        <p className="text-gray-600 mb-2 text-sm sm:text-base break-words">
+          {teacher.email}
+        </p>
+        <p className="text-xs sm:text-sm text-blue-600 mb-2 capitalize">
           Role: {teacher.role}
         </p>
-        <p className="text-gray-700 mb-4">{teacher.bio}</p>
+        <p className="text-gray-700 mb-4 text-sm sm:text-base">{teacher.bio}</p>
 
         {teacher.categories && teacher.categories.length > 0 && (
           <div className="mb-4">
@@ -172,23 +176,25 @@ export default function TeacherProfile() {
 
         {teacher.idFile && (
           <img
-            src={`http://localhost:5001/uploads/${teacher.idFile}`}
+            src={`${
+              import.meta.env.VITE_API_BASE_URL || "http://localhost:5001"
+            }/uploads/${teacher.idFile}`}
             alt={teacher.name}
-            className="w-48 h-48 object-cover rounded-xl border mb-4"
+            className="w-full sm:w-48 h-auto sm:h-48 object-cover rounded-lg sm:rounded-xl border mb-4"
           />
         )}
 
         {connectionStatus === "connected" ? (
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <button
-              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-2.5 sm:py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 text-sm sm:text-base"
               onClick={() => navigate(`/chat/${teacher._id}`)}
               disabled={loading}
             >
               {loading ? "Loading..." : "💬 Chat"}
             </button>
             <button
-              className="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+              className="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white py-2.5 sm:py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 text-sm sm:text-base"
               onClick={handleDisconnect}
               disabled={loading}
             >
@@ -197,14 +203,14 @@ export default function TeacherProfile() {
           </div>
         ) : connectionStatus === "pending" ? (
           <button
-            className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-2 rounded-lg shadow-md"
+            className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-2.5 sm:py-2 rounded-lg shadow-md text-sm sm:text-base"
             disabled
           >
             ⏳ Pending
           </button>
         ) : (
           <button
-            className="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2 rounded-lg hover:from-indigo-600 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+            className="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2.5 sm:py-2 rounded-lg hover:from-indigo-600 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 text-sm sm:text-base"
             onClick={handleConnect}
             disabled={loading}
           >
@@ -213,14 +219,16 @@ export default function TeacherProfile() {
         )}
 
         {/* Report Button - Only show when connected */}
-        {user && user.id !== teacher._id && connectionStatus === "connected" && (
-          <button
-            className="w-full mt-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2 rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
-            onClick={() => setShowReportModal(true)}
-          >
-            🚨 Report User
-          </button>
-        )}
+        {user &&
+          user.id !== teacher._id &&
+          connectionStatus === "connected" && (
+            <button
+              className="w-full mt-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2.5 sm:py-2 rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 text-sm sm:text-base"
+              onClick={() => setShowReportModal(true)}
+            >
+              🚨 Report User
+            </button>
+          )}
 
         {/* Report Modal */}
         <ReportUserModal

@@ -15,7 +15,7 @@ function Explore() {
   const [searchParams] = useSearchParams();
   const { user, loading } = useAuth(); // ✅ use loading
   const skillFromCategory = location.state?.selectedSkill || "";
-  const searchFromUrl = searchParams.get('search') || "";
+  const searchFromUrl = searchParams.get("search") || "";
 
   const [teachers, setTeachers] = useState([]);
   const [skills, setSkills] = useState([]);
@@ -34,7 +34,9 @@ function Explore() {
   const getImageUrl = (idFile) => {
     if (!idFile) return "https://via.placeholder.com/300";
     if (idFile.startsWith("http")) return idFile;
-    return `http://localhost:5001/uploads/${idFile}`;
+    const API_BASE_URL =
+      import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+    return `${API_BASE_URL}/uploads/${idFile}`;
   };
 
   const fetchTeachers = async () => {
@@ -212,27 +214,29 @@ function Explore() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row px-6 py-6 bg-gray-100 min-h-screen">
+    <div className="flex flex-col md:flex-row px-3 sm:px-4 md:px-6 py-4 sm:py-6 bg-gray-100 min-h-screen">
       {/* Sidebar */}
-      <aside className="w-full md:w-1/4 bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-2xl shadow-xl p-6 mb-6 md:mb-0 border border-indigo-100">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+      <aside className="w-full md:w-1/4 bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 mb-4 md:mb-0 md:mr-4 border border-indigo-100">
+        <div className="mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
             🎯 Discover Skills
           </h2>
-          <p className="text-gray-600 text-sm">Find your perfect mentor</p>
+          <p className="text-gray-600 text-xs sm:text-sm">
+            Find your perfect mentor
+          </p>
         </div>
 
         {/* Search Bar */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <div className="relative">
             <input
               type="text"
               placeholder="Search teachers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border-2 border-indigo-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-white/80 backdrop-blur-sm"
+              className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border-2 border-indigo-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-white/80 backdrop-blur-sm text-sm sm:text-base"
             />
-            <div className="absolute left-3 top-3.5 text-indigo-400">
+            <div className="absolute left-2.5 sm:left-3 top-2.5 sm:top-3.5 text-indigo-400 text-sm sm:text-base">
               🔍
             </div>
           </div>
@@ -262,9 +266,13 @@ function Explore() {
                     checked={selectedSkills.includes(skill)}
                     className="mr-3 w-4 h-4 text-indigo-600 bg-white border-2 border-indigo-300 rounded focus:ring-indigo-500 focus:ring-2"
                   />
-                  <span className={`text-sm font-medium ${
-                    selectedSkills.includes(skill) ? 'text-white' : 'text-gray-700 group-hover:text-indigo-700'
-                  }`}>
+                  <span
+                    className={`text-sm font-medium ${
+                      selectedSkills.includes(skill)
+                        ? "text-white"
+                        : "text-gray-700 group-hover:text-indigo-700"
+                    }`}
+                  >
                     {skill}
                   </span>
                 </label>
@@ -298,9 +306,13 @@ function Explore() {
                   checked={selectedLevels.includes(level)}
                   className="mr-3 w-4 h-4 text-green-600 bg-white border-2 border-green-300 rounded focus:ring-green-500 focus:ring-2"
                 />
-                <span className={`text-sm font-medium ${
-                  selectedLevels.includes(level) ? 'text-white' : 'text-gray-700 group-hover:text-green-700'
-                }`}>
+                <span
+                  className={`text-sm font-medium ${
+                    selectedLevels.includes(level)
+                      ? "text-white"
+                      : "text-gray-700 group-hover:text-green-700"
+                  }`}
+                >
                   {level}
                 </span>
               </label>
@@ -312,8 +324,12 @@ function Explore() {
         <div className="space-y-4">
           <div className="p-4 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl border border-indigo-200">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-indigo-700">Teachers Found</span>
-              <span className="text-2xl font-bold text-indigo-600">{filteredTeachers.length}</span>
+              <span className="text-sm font-medium text-indigo-700">
+                Teachers Found
+              </span>
+              <span className="text-2xl font-bold text-indigo-600">
+                {filteredTeachers.length}
+              </span>
             </div>
           </div>
 
@@ -327,12 +343,12 @@ function Explore() {
       </aside>
 
       {/* Teacher Cards */}
-      <div className="w-full md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ml-0 md:ml-6">
+      <div className="w-full md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
         {filteredTeachers.length > 0 ? (
           filteredTeachers.map((teacher) => (
             <div
               key={teacher._id}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 p-6 relative overflow-hidden group border border-gray-100"
+              className="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 p-4 sm:p-6 relative overflow-hidden group border border-gray-100"
             >
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -342,7 +358,7 @@ function Explore() {
                   <img
                     src={getImageUrl(teacher.idFile)}
                     alt={teacher.name}
-                    className="w-full h-48 object-cover rounded-xl shadow-md"
+                    className="w-full h-40 sm:h-48 object-cover rounded-lg sm:rounded-xl shadow-md"
                   />
                   <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
                     <div className="flex items-center text-yellow-500">
@@ -354,10 +370,12 @@ function Explore() {
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-1">{teacher.name}</h3>
-                    <p className="text-indigo-600 font-medium text-sm">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
+                      {teacher.name}
+                    </h3>
+                    <p className="text-indigo-600 font-medium text-xs sm:text-sm">
                       {teacher.skill || teacher.categories?.join(", ")}
                     </p>
                   </div>
@@ -385,7 +403,7 @@ function Explore() {
                         },
                       })
                     }
-                    className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 px-4 rounded-xl hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-semibold text-sm"
+                    className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg sm:rounded-xl hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-semibold text-xs sm:text-sm"
                   >
                     👤 View Profile
                   </button>
@@ -398,8 +416,12 @@ function Explore() {
             <div className="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mb-4">
               <span className="text-4xl">🔍</span>
             </div>
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">No teachers found</h3>
-            <p className="text-gray-500 text-center">Try adjusting your filters or search terms</p>
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+              No teachers found
+            </h3>
+            <p className="text-gray-500 text-center">
+              Try adjusting your filters or search terms
+            </p>
           </div>
         )}
       </div>

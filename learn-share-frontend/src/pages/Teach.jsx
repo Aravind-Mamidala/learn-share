@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-
 const TEACH_CATEGORIES = [
   "Programming",
   "Web Development",
@@ -45,7 +44,7 @@ function Teach() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const formData = new FormData();
       formData.append("name", form.name);
@@ -58,11 +57,17 @@ function Teach() {
       formData.append("linkedin", form.linkedin);
       formData.append("website", form.website);
       if (idFile) formData.append("idFile", idFile); // include image
-  
-      const res = await axios.post("http://localhost:5001/api/teacher/register", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-  
+
+      const API_BASE_URL =
+        import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+      const res = await axios.post(
+        `${API_BASE_URL}/api/teacher/register`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
       alert(res.data.message);
       console.log("Saved teacher:", res.data.teacher);
     } catch (err) {
@@ -70,36 +75,39 @@ function Teach() {
       alert(err.response?.data?.message || "Error registering teacher");
     }
   };
-  
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-violet-50 to-fuchsia-50">
       {/* Hero */}
-      <div className="pt-28 pb-10 text-center px-4">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+      <div className="pt-20 sm:pt-24 md:pt-28 pb-6 sm:pb-8 md:pb-10 text-center px-3 sm:px-4">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900">
           Become a Teacher on <span className="text-blue-600">LearnShare</span>
         </h1>
-        <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
-          Share your expertise, inspire thousands, and build your teaching brand.
+        <p className="mt-2 sm:mt-3 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto px-2">
+          Share your expertise, inspire thousands, and build your teaching
+          brand.
         </p>
       </div>
 
       {/* Main two-column section */}
-      <div className="mx-auto max-w-6xl px-4 pb-16">
+      <div className="mx-auto max-w-6xl px-3 sm:px-4 md:px-6 pb-8 sm:pb-12 md:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Left: Illustration / Mood */}
-          <div className="relative overflow-hidden rounded-2xl shadow-xl min-h-[420px] lg:min-h-full">
+          <div className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-xl min-h-[300px] sm:min-h-[350px] md:min-h-[420px] lg:min-h-full">
             <img
               src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1600&auto=format&fit=crop"
               alt="Teach & Inspire"
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900/70 via-violet-900/50 to-fuchsia-900/40" />
-            <div className="relative z-10 p-8 md:p-10 lg:p-12 text-white h-full flex flex-col justify-end">
-              <h2 className="text-3xl font-bold mb-3">Share your knowledge.</h2>
-              <p className="text-white/90 leading-relaxed">
-                Publish courses, host live sessions, and mentor learners across the globe.
-                Choose your topics, set your style, and we’ll amplify your voice.
+            <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 text-white h-full flex flex-col justify-end">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3">
+                Share your knowledge.
+              </h2>
+              <p className="text-white/90 leading-relaxed text-sm sm:text-base">
+                Publish courses, host live sessions, and mentor learners across
+                the globe. Choose your topics, set your style, and we’ll amplify
+                your voice.
               </p>
               <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <li className="bg-white/10 rounded-lg px-4 py-3 backdrop-blur">
@@ -119,20 +127,25 @@ function Teach() {
           </div>
 
           {/* Right: Form */}
-          <div className="bg-white/70 backdrop-blur-xl rounded-2xl shadow-xl border border-white/40">
-            <form onSubmit={handleSubmit} className="p-6 sm:p-8 lg:p-10">
+          <div className="bg-white/70 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-xl border border-white/40">
+            <form onSubmit={handleSubmit} className="p-4 sm:p-6 md:p-8 lg:p-10">
               <div className="space-y-6">
                 {/* Personal info */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900">Your Details</h3>
-                  <p className="text-sm text-gray-500">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                    Your Details
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-500">
                     Tell us a bit about yourself and what you want to teach.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Full Name
                     </label>
                     <input
@@ -140,13 +153,18 @@ function Teach() {
                       type="text"
                       required
                       value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      onChange={(e) =>
+                        setForm({ ...form, name: e.target.value })
+                      }
                       className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="e.g., Alex Johnson"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Email
                     </label>
                     <input
@@ -154,7 +172,9 @@ function Teach() {
                       type="email"
                       required
                       value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      onChange={(e) =>
+                        setForm({ ...form, email: e.target.value })
+                      }
                       className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="you@example.com"
                     />
@@ -164,9 +184,12 @@ function Teach() {
                 {/* Categories */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    What do you want to teach? <span className="text-red-500">*</span>
+                    What do you want to teach?{" "}
+                    <span className="text-red-500">*</span>
                   </label>
-                  <p className="text-xs text-gray-500 mb-2">Select one or more categories.</p>
+                  <p className="text-xs text-gray-500 mb-2">
+                    Select one or more categories.
+                  </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {TEACH_CATEGORIES.map((cat) => {
                       const active = form.categories.includes(cat);
@@ -197,8 +220,12 @@ function Teach() {
                 {/* Experience + Mode */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="experience" className="block text-sm font-medium text-gray-700">
-                      Years of Experience: <span className="font-semibold">{form.experience}</span>
+                    <label
+                      htmlFor="experience"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Years of Experience:{" "}
+                      <span className="font-semibold">{form.experience}</span>
                     </label>
                     <input
                       id="experience"
@@ -206,7 +233,9 @@ function Teach() {
                       min="0"
                       max="30"
                       value={form.experience}
-                      onChange={(e) => setForm({ ...form, experience: Number(e.target.value) })}
+                      onChange={(e) =>
+                        setForm({ ...form, experience: Number(e.target.value) })
+                      }
                       className="mt-3 w-full accent-blue-600"
                     />
                     <div className="flex justify-between text-xs text-gray-500 mt-1">
@@ -252,7 +281,10 @@ function Teach() {
 
                 {/* Bio */}
                 <div>
-                  <label htmlFor="bio" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="bio"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Short Bio
                   </label>
                   <textarea
@@ -268,40 +300,55 @@ function Teach() {
                 {/* Links */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                   <div>
-                    <label htmlFor="github" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="github"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       GitHub
                     </label>
                     <input
                       id="github"
                       type="url"
                       value={form.github}
-                      onChange={(e) => setForm({ ...form, github: e.target.value })}
+                      onChange={(e) =>
+                        setForm({ ...form, github: e.target.value })
+                      }
                       placeholder="https://github.com/username"
                       className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div>
-                    <label htmlFor="linkedin" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="linkedin"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       LinkedIn
                     </label>
                     <input
                       id="linkedin"
                       type="url"
                       value={form.linkedin}
-                      onChange={(e) => setForm({ ...form, linkedin: e.target.value })}
+                      onChange={(e) =>
+                        setForm({ ...form, linkedin: e.target.value })
+                      }
                       placeholder="https://linkedin.com/in/username"
                       className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div>
-                    <label htmlFor="website" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="website"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Website / Portfolio
                     </label>
                     <input
                       id="website"
                       type="url"
                       value={form.website}
-                      onChange={(e) => setForm({ ...form, website: e.target.value })}
+                      onChange={(e) =>
+                        setForm({ ...form, website: e.target.value })
+                      }
                       placeholder="https://yourdomain.com"
                       className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -337,12 +384,15 @@ function Teach() {
                     id="agree"
                     type="checkbox"
                     checked={form.agree}
-                    onChange={(e) => setForm({ ...form, agree: e.target.checked })}
+                    onChange={(e) =>
+                      setForm({ ...form, agree: e.target.checked })
+                    }
                     className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                     required
                   />
                   <label htmlFor="agree" className="text-sm text-gray-600">
-                    I agree to the community guidelines and confirm the information provided is accurate.
+                    I agree to the community guidelines and confirm the
+                    information provided is accurate.
                   </label>
                 </div>
 
@@ -363,7 +413,8 @@ function Teach() {
                     Register as Teacher
                   </button>
                   <p className="text-xs text-gray-500 mt-3">
-                    After submitting, we’ll review your profile and guide you to your teaching dashboard.
+                    After submitting, we’ll review your profile and guide you to
+                    your teaching dashboard.
                   </p>
                 </div>
               </div>

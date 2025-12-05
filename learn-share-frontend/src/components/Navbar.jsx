@@ -16,7 +16,7 @@ function Navbar() {
   const firstLetter = user?.name ? user.name.charAt(0).toUpperCase() : "";
 
   const handleSearch = (e) => {
-    if (e.key === 'Enter' && searchQuery.trim()) {
+    if (e.key === "Enter" && searchQuery.trim()) {
       navigate(`/explore?search=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery("");
     }
@@ -37,16 +37,28 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className={`bg-white shadow-md fixed w-full top-0 left-0 z-50 ${isDarkMode ? 'dark:bg-gray-800 dark:text-white' : ''}`}>
-      <div className="container mx-auto flex justify-between items-center px-4 py-5">
+    <nav
+      className={`bg-white shadow-md fixed w-full top-0 left-0 z-50 ${
+        isDarkMode ? "dark:bg-gray-800 dark:text-white" : ""
+      }`}
+    >
+      <div className="container mx-auto flex justify-between items-center px-3 sm:px-4 py-3 sm:py-5">
         {/* Logo */}
-        <Link to="/" className="text-3xl font-bold text-green-600 dark:text-green-400">
+        <Link
+          to="/"
+          className="text-xl sm:text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400"
+        >
           LearnShare
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center gap-8 text-lg">
-          <Link to="/explore">Explore</Link>
+        <ul className="hidden md:flex items-center gap-4 lg:gap-8 text-base lg:text-lg">
+          <Link
+            to="/explore"
+            className="hover:text-green-500 dark:hover:text-green-400 transition-colors"
+          >
+            Explore
+          </Link>
           <li>
             <input
               type="text"
@@ -54,11 +66,18 @@ function Navbar() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={handleSearch}
-              className={`border rounded-full px-5 py-2 outline-none focus:ring-2 focus:ring-green-500 text-base ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600 dark:text-white' : ''}`}
+              className={`border rounded-full px-3 lg:px-5 py-1.5 lg:py-2 outline-none focus:ring-2 focus:ring-green-500 text-sm lg:text-base w-32 lg:w-auto ${
+                isDarkMode
+                  ? "dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  : ""
+              }`}
             />
           </li>
           <li>
-            <Link to="/teach" className="hover:text-green-500 dark:hover:text-green-400">
+            <Link
+              to="/teach"
+              className="hover:text-green-500 dark:hover:text-green-400"
+            >
               Teach With Us
             </Link>
           </li>
@@ -67,7 +86,11 @@ function Navbar() {
               onClick={toggleTheme}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
-              {isDarkMode ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-gray-600" />}
+              {isDarkMode ? (
+                <FaSun className="text-yellow-500" />
+              ) : (
+                <FaMoon className="text-gray-600" />
+              )}
             </button>
           </li>
 
@@ -90,8 +113,18 @@ function Navbar() {
               </button>
 
               {isDropdownOpen && (
-                <ul className={`absolute right-0 mt-2 shadow-lg rounded-lg border py-2 min-w-[200px] z-50 ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600' : 'bg-white border-gray-200'}`}>
-                  <li className={`px-5 py-3 transition-colors ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}>
+                <ul
+                  className={`absolute right-0 mt-2 shadow-lg rounded-lg border py-2 min-w-[180px] max-w-[250px] z-50 ${
+                    isDarkMode
+                      ? "dark:bg-gray-700 dark:border-gray-600"
+                      : "bg-white border-gray-200"
+                  }`}
+                >
+                  <li
+                    className={`px-5 py-3 transition-colors ${
+                      isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"
+                    }`}
+                  >
                     <Link
                       to="/dashboard"
                       onClick={() => setIsDropdownOpen(false)}
@@ -100,7 +133,11 @@ function Navbar() {
                     </Link>
                   </li>
                   {user?.role === "admin" && (
-                    <li className={`px-5 py-3 transition-colors ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}>
+                    <li
+                      className={`px-5 py-3 transition-colors ${
+                        isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"
+                      }`}
+                    >
                       <Link
                         to="/admin"
                         onClick={() => setIsDropdownOpen(false)}
@@ -109,7 +146,11 @@ function Navbar() {
                       </Link>
                     </li>
                   )}
-                  <li className={`px-5 py-3 transition-colors ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}>
+                  <li
+                    className={`px-5 py-3 transition-colors ${
+                      isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"
+                    }`}
+                  >
                     <Link
                       to="/profile-update"
                       onClick={() => setIsDropdownOpen(false)}
@@ -117,7 +158,11 @@ function Navbar() {
                       Update Profile
                     </Link>
                   </li>
-                  <li className={`px-5 py-3 transition-colors ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}>
+                  <li
+                    className={`px-5 py-3 transition-colors ${
+                      isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"
+                    }`}
+                  >
                     <Link
                       to="/complaints"
                       onClick={() => setIsDropdownOpen(false)}
@@ -141,7 +186,11 @@ function Navbar() {
                       Connections
                     </Link>
                   </li>
-                  <li className={`px-5 py-3 transition-colors ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}>
+                  <li
+                    className={`px-5 py-3 transition-colors ${
+                      isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"
+                    }`}
+                  >
                     <Link
                       to="/requests"
                       onClick={() => setIsDropdownOpen(false)}
@@ -159,9 +208,15 @@ function Navbar() {
                       </Link>
                     </li>
                   )}
-                  <li className={`border-t mt-2 pt-2 ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                  <li
+                    className={`border-t mt-2 pt-2 ${
+                      isDarkMode ? "border-gray-600" : "border-gray-200"
+                    }`}
+                  >
                     <button
-                      className={`px-5 py-3 cursor-pointer w-full text-left transition-colors ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}
+                      className={`px-5 py-3 cursor-pointer w-full text-left transition-colors ${
+                        isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"
+                      }`}
                       onClick={() => {
                         logout();
                         setIsDropdownOpen(false);
@@ -178,8 +233,9 @@ function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-3xl"
+          className="md:hidden text-2xl sm:text-3xl p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
         >
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
@@ -187,8 +243,12 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className={`md:hidden shadow-lg px-6 py-8 text-lg ${isDarkMode ? 'dark:bg-gray-800 dark:text-white' : 'bg-white'}`}>
-          <ul className="flex flex-col gap-6">
+        <div
+          className={`md:hidden shadow-lg px-4 sm:px-6 py-6 text-base ${
+            isDarkMode ? "dark:bg-gray-800 dark:text-white" : "bg-white"
+          }`}
+        >
+          <ul className="flex flex-col gap-4 sm:gap-6">
             <li>
               <Link to="/explore">Explore</Link>
             </li>
@@ -199,11 +259,18 @@ function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={handleSearch}
-                className={`border rounded-full px-5 py-2 w-full outline-none focus:ring-2 focus:ring-green-500 text-base ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600 dark:text-white' : ''}`}
+                className={`border rounded-full px-4 py-2.5 w-full outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base ${
+                  isDarkMode
+                    ? "dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    : ""
+                }`}
               />
             </li>
             <li>
-              <Link to="/teach" className="hover:text-green-500 dark:hover:text-green-400">
+              <Link
+                to="/teach"
+                className="hover:text-green-500 dark:hover:text-green-400"
+              >
                 Teach With Us
               </Link>
             </li>
@@ -212,14 +279,19 @@ function Navbar() {
                 onClick={toggleTheme}
                 className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
               >
-                {isDarkMode ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-gray-600" />}
+                {isDarkMode ? (
+                  <FaSun className="text-yellow-500" />
+                ) : (
+                  <FaMoon className="text-gray-600" />
+                )}
               </button>
             </li>
             {!isLoggedIn ? (
               <li>
                 <Link
                   to="/login"
-                  className="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600"
+                  className="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 block text-center transition-colors"
+                  onClick={() => setIsOpen(false)}
                 >
                   Login
                 </Link>
@@ -227,30 +299,80 @@ function Navbar() {
             ) : (
               <>
                 <li>
-                  <Link to="/dashboard">Dashboard</Link>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="hover:text-green-500 dark:hover:text-green-400 transition-colors"
+                  >
+                    Dashboard
+                  </Link>
                 </li>
                 {user?.role === "admin" && (
                   <li>
-                    <Link to="/admin">Admin Panel</Link>
+                    <Link
+                      to="/admin"
+                      onClick={() => setIsOpen(false)}
+                      className="hover:text-green-500 dark:hover:text-green-400 transition-colors"
+                    >
+                      Admin Panel
+                    </Link>
                   </li>
                 )}
                 <li>
-                  <Link to="/profile-update">Update Profile</Link>
+                  <Link
+                    to="/profile-update"
+                    onClick={() => setIsOpen(false)}
+                    className="hover:text-green-500 dark:hover:text-green-400 transition-colors"
+                  >
+                    Update Profile
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/complaints">My Complaints</Link>
+                  <Link
+                    to="/complaints"
+                    onClick={() => setIsOpen(false)}
+                    className="hover:text-green-500 dark:hover:text-green-400 transition-colors"
+                  >
+                    My Complaints
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/my-courses">My Courses</Link>
+                  <Link
+                    to="/my-courses"
+                    onClick={() => setIsOpen(false)}
+                    className="hover:text-green-500 dark:hover:text-green-400 transition-colors"
+                  >
+                    My Courses
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/connections">Connections</Link>
+                  <Link
+                    to="/connections"
+                    onClick={() => setIsOpen(false)}
+                    className="hover:text-green-500 dark:hover:text-green-400 transition-colors"
+                  >
+                    Connections
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/requests">Requests Received</Link>
+                  <Link
+                    to="/requests"
+                    onClick={() => setIsOpen(false)}
+                    className="hover:text-green-500 dark:hover:text-green-400 transition-colors"
+                  >
+                    Requests Received
+                  </Link>
                 </li>
-                <li onClick={logout} className="cursor-pointer">
-                  Logout
+                <li>
+                  <button
+                    onClick={() => {
+                      logout();
+                      setIsOpen(false);
+                    }}
+                    className="cursor-pointer w-full text-left hover:text-green-500 dark:hover:text-green-400 transition-colors"
+                  >
+                    Logout
+                  </button>
                 </li>
               </>
             )}

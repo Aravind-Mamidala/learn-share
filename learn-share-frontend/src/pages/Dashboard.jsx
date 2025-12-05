@@ -116,19 +116,19 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
                 Welcome back, {user?.name}! 👋
               </h1>
-              <p className="text-gray-600 text-lg">
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg">
                 Ready to continue your learning journey?
               </p>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden sm:block">
               <div className="text-right">
                 <p className="text-sm text-gray-500">Today's Date</p>
                 <p className="text-lg font-semibold text-gray-900">
@@ -145,79 +145,79 @@ const Dashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border-l-4 border-green-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Active Connections</p>
-                <p className="text-3xl font-bold text-gray-900">{stats.connections}</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Active Connections</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.connections}</p>
                 <p className="text-xs text-green-600 mt-1">+2 this week</p>
               </div>
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-green-600 text-xl">👥</span>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <span className="text-green-600 text-lg sm:text-xl">👥</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-yellow-500">
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border-l-4 border-yellow-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Pending Requests</p>
-                <p className="text-3xl font-bold text-gray-900">{stats.pendingRequests}</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Pending Requests</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.pendingRequests}</p>
                 <p className="text-xs text-yellow-600 mt-1">Awaiting response</p>
               </div>
-              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                <span className="text-yellow-600 text-xl">⏳</span>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                <span className="text-yellow-600 text-lg sm:text-xl">⏳</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border-l-4 border-blue-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Messages Sent</p>
-                <p className="text-3xl font-bold text-gray-900">{stats.totalMessages}</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Messages Sent</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.totalMessages}</p>
                 <p className="text-xs text-blue-600 mt-1">This month</p>
               </div>
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <span className="text-blue-600 text-xl">💬</span>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <span className="text-blue-600 text-lg sm:text-xl">💬</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500">
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border-l-4 border-purple-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Learning Streak</p>
-                <p className="text-3xl font-bold text-gray-900">7</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Learning Streak</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">7</p>
                 <p className="text-xs text-purple-600 mt-1">Days in a row</p>
               </div>
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-purple-600 text-xl">🔥</span>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                <span className="text-purple-600 text-lg sm:text-xl">🔥</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* User Profile Card */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
-                <h2 className="text-xl font-semibold text-white">Your Profile</h2>
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-4 sm:px-6 py-3 sm:py-4">
+                <h2 className="text-lg sm:text-xl font-semibold text-white">Your Profile</h2>
               </div>
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="text-center">
-                  <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white text-2xl font-bold">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <span className="text-white text-xl sm:text-2xl font-bold">
                       {user?.name?.charAt(0)}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">
                     {user?.name}
                   </h3>
-                  <p className="text-gray-600 mb-2">{user?.email}</p>
-                  <div className="flex items-center justify-between mb-2">
+                  <p className="text-gray-600 mb-2 text-sm sm:text-base break-words">{user?.email}</p>
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-2 mb-2">
                     <div className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                       Active Member
@@ -261,10 +261,10 @@ const Dashboard = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* Recent Connections */}
             <div className="bg-white rounded-xl shadow-lg">
-              <div className="px-6 py-4 border-b border-gray-200">
-                <h2 className="text-xl font-semibold text-gray-900">Recent Connections</h2>
+              <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Recent Connections</h2>
               </div>
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {recentConnections.length > 0 ? (
                   <div className="space-y-4">
                     {recentConnections.map((teacher, index) => (
@@ -310,46 +310,46 @@ const Dashboard = () => {
                 <h2 className="text-xl font-semibold text-gray-900">Quick Actions</h2>
               </div>
               <div className="p-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                   {user?.role !== "admin" && (
                     <>
                       <Link
                         to="/explore"
-                        className="group bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105"
+                        className="group bg-gradient-to-r from-blue-500 to-blue-600 text-white p-3 sm:p-4 rounded-lg sm:rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105"
                       >
                         <div className="text-center">
-                          <div className="text-2xl mb-2">🔍</div>
-                          <h3 className="font-semibold text-sm">Explore</h3>
+                          <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🔍</div>
+                          <h3 className="font-semibold text-xs sm:text-sm">Explore</h3>
                         </div>
                       </Link>
 
                       <Link
                         to="/my-courses"
-                        className="group bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-xl hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105"
+                        className="group bg-gradient-to-r from-green-500 to-green-600 text-white p-3 sm:p-4 rounded-lg sm:rounded-xl hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105"
                       >
                         <div className="text-center">
-                          <div className="text-2xl mb-2">📚</div>
-                          <h3 className="font-semibold text-sm">My Courses</h3>
+                          <div className="text-xl sm:text-2xl mb-1 sm:mb-2">📚</div>
+                          <h3 className="font-semibold text-xs sm:text-sm">My Courses</h3>
                         </div>
                       </Link>
 
                       <Link
                         to="/connections"
-                        className="group bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105"
+                        className="group bg-gradient-to-r from-purple-500 to-purple-600 text-white p-3 sm:p-4 rounded-lg sm:rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105"
                       >
                         <div className="text-center">
-                          <div className="text-2xl mb-2">👥</div>
-                          <h3 className="font-semibold text-sm">Connections</h3>
+                          <div className="text-xl sm:text-2xl mb-1 sm:mb-2">👥</div>
+                          <h3 className="font-semibold text-xs sm:text-sm">Connections</h3>
                         </div>
                       </Link>
 
                       <Link
                         to="/requests"
-                        className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all transform hover:scale-105"
+                        className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white p-3 sm:p-4 rounded-lg sm:rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all transform hover:scale-105"
                       >
                         <div className="text-center">
-                          <div className="text-2xl mb-2">📬</div>
-                          <h3 className="font-semibold text-sm">Requests</h3>
+                          <div className="text-xl sm:text-2xl mb-1 sm:mb-2">📬</div>
+                          <h3 className="font-semibold text-xs sm:text-sm">Requests</h3>
                         </div>
                       </Link>
                     </>

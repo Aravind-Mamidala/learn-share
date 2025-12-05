@@ -34,8 +34,8 @@ function Signup() {
           "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f')",
       }}
     >
-      <div className="bg-white/20 backdrop-blur-lg p-10 rounded-2xl shadow-2xl max-w-md w-full border border-white/30">
-        <h2 className="text-4xl font-bold text-white text-center mb-8 drop-shadow-lg">
+      <div className="bg-white/20 backdrop-blur-lg p-6 sm:p-8 md:p-10 rounded-xl sm:rounded-2xl shadow-2xl max-w-md w-full mx-4 sm:mx-auto border border-white/30">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-6 sm:mb-8 drop-shadow-lg">
           Sign Up
         </h2>
         <form className="space-y-6" onSubmit={handleSignup}>

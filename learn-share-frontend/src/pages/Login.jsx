@@ -35,14 +35,13 @@ function Login() {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        "http://localhost:5001/api/auth/forgot-password",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: resetEmail }),
-        }
-      );
+      const API_BASE_URL =
+        import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+      const res = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: resetEmail }),
+      });
       const data = await res.json();
       setResetMessage(data.message || "Password reset email sent!");
 
@@ -62,8 +61,10 @@ function Login() {
     }
 
     try {
+      const API_BASE_URL =
+        import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
       const res = await fetch(
-        "http://localhost:5001/api/auth/reset-password-with-otp",
+        `${API_BASE_URL}/api/auth/reset-password-with-otp`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -95,7 +96,9 @@ function Login() {
 
   const handleResendOTP = async () => {
     try {
-      const res = await fetch("http://localhost:5001/api/auth/resend-otp", {
+      const API_BASE_URL =
+        import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+      const res = await fetch(`${API_BASE_URL}/api/auth/resend-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: resetEmail }),
@@ -119,8 +122,8 @@ function Login() {
       <div className="absolute inset-0 bg-black/50 z-0"></div>
 
       {/* Glass Card */}
-      <div className="relative z-10 bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-2xl max-w-md w-full animate-fadeIn">
-        <h2 className="text-4xl font-bold text-white text-center mb-8">
+      <div className="relative z-10 bg-white/10 backdrop-blur-lg p-6 sm:p-8 md:p-10 rounded-xl sm:rounded-2xl shadow-2xl max-w-md w-full mx-4 sm:mx-auto animate-fadeIn">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-6 sm:mb-8">
           Login
         </h2>
 
@@ -189,8 +192,8 @@ function Login() {
 
         {/* Forgot Password Form */}
         {showForgotPassword && !showOTPForm && (
-          <div className="mt-6 p-4 bg-white/10 backdrop-blur-lg rounded-2xl">
-            <h3 className="text-white text-lg font-semibold mb-4 text-center">
+          <div className="mt-4 sm:mt-6 p-4 sm:p-4 bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl">
+            <h3 className="text-white text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-center">
               Reset Password
             </h3>
             <form onSubmit={handleForgotPassword} className="space-y-4">
@@ -219,8 +222,8 @@ function Login() {
 
         {/* OTP Verification Form */}
         {showOTPForm && (
-          <div className="mt-6 p-4 bg-white/10 backdrop-blur-lg rounded-2xl">
-            <h3 className="text-white text-lg font-semibold mb-4 text-center">
+          <div className="mt-4 sm:mt-6 p-4 sm:p-4 bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl">
+            <h3 className="text-white text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-center">
               Enter OTP & New Password
             </h3>
             <form onSubmit={handleVerifyOTP} className="space-y-4">

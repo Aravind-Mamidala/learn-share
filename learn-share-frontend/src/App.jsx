@@ -36,141 +36,141 @@ function App() {
           <Navbar />
 
           {/* Add top padding for navbar height */}
-          <div className="pt-24">
-          <Routes>
-            {/* Home Page */}
-            <Route
-              path="/"
-              element={
-                <div className="home-container">
-                  <Welcome
-                    userName="Bunny"
-                    profileImage="https://img.stablecog.com/insecure/1920w/aHR0cHM6Ly9iLnN0YWJsZWNvZy5jb20vYzQ5MmYyNDgtMjg3MC00M2VhLWI3MzMtMGY3N2JjYTE1YzUxLmpwZWc.webp"
-                  />
-                  <div className="mt-6">
-                    <Slider />
+          <div className="pt-16 sm:pt-20 md:pt-24">
+            <Routes>
+              {/* Home Page */}
+              <Route
+                path="/"
+                element={
+                  <div className="home-container">
+                    <Welcome
+                      userName="Bunny"
+                      profileImage="https://img.stablecog.com/insecure/1920w/aHR0cHM6Ly9iLnN0YWJsZWNvZy5jb20vYzQ5MmYyNDgtMjg3MC00M2VhLWI3MzMtMGY3N2JjYTE1YzUxLmpwZWc.webp"
+                    />
+                    <div className="mt-6">
+                      <Slider />
+                    </div>
+                    <div className="mt-6">
+                      <Categories />
+                    </div>
+                    <div className="mt-6">
+                      <Footer />
+                    </div>
                   </div>
-                  <div className="mt-6">
-                    <Categories />
-                  </div>
-                  <div className="mt-6">
-                    <Footer />
-                  </div>
-                </div>
-              }
-            />
+                }
+              />
 
-            {/* Explore Page */}
-            <Route path="/explore" element={<Explore />} />
+              {/* Explore Page */}
+              <Route path="/explore" element={<Explore />} />
 
-            {/* Protected Pages */}
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/my-courses"
-              element={
-                <ProtectedRoute>
-                  <MyCourses />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/connections"
-              element={
-                <ProtectedRoute>
-                  <Connections />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/requests"
-              element={
-                <ProtectedRoute>
-                  <Requests />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/chat"
-              element={
-                <ProtectedRoute>
-                  <ChatBox />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/chat/:teacherId"
-              element={
-                <ProtectedRoute>
-                  <ChatBox />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/debug"
-              element={
-                <ProtectedRoute>
-                  <DebugConnections />
-                </ProtectedRoute>
-              }
-            />
+              {/* Protected Pages */}
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/my-courses"
+                element={
+                  <ProtectedRoute>
+                    <MyCourses />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/connections"
+                element={
+                  <ProtectedRoute>
+                    <Connections />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/requests"
+                element={
+                  <ProtectedRoute>
+                    <Requests />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/chat"
+                element={
+                  <ProtectedRoute>
+                    <ChatBox />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/chat/:teacherId"
+                element={
+                  <ProtectedRoute>
+                    <ChatBox />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/debug"
+                element={
+                  <ProtectedRoute>
+                    <DebugConnections />
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* Admin Dashboard */}
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            />
+              {/* Admin Dashboard */}
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* Profile Update */}
-            <Route
-              path="/profile-update"
-              element={
-                <ProtectedRoute>
-                  <ProfileUpdate />
-                </ProtectedRoute>
-              }
-            />
+              {/* Profile Update */}
+              <Route
+                path="/profile-update"
+                element={
+                  <ProtectedRoute>
+                    <ProfileUpdate />
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* Complaints */}
-            <Route
-              path="/complaints"
-              element={
-                <ProtectedRoute>
-                  <Complaints />
-                </ProtectedRoute>
-              }
-            />
+              {/* Complaints */}
+              <Route
+                path="/complaints"
+                element={
+                  <ProtectedRoute>
+                    <Complaints />
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* Auth Pages */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+              {/* Auth Pages */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
 
-            {/* Teach Page */}
-            <Route path="/teach" element={<Teach />} />
+              {/* Teach Page */}
+              <Route path="/teach" element={<Teach />} />
 
-            {/* Teacher Profile */}
-            <Route
-              path="/teacher/:teacherId"
-              element={
-                <ProtectedRoute>
-                  <TeacherProfile />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </div>
-      </Router>
-    </AuthProvider>
+              {/* Teacher Profile */}
+              <Route
+                path="/teacher/:teacherId"
+                element={
+                  <ProtectedRoute>
+                    <TeacherProfile />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </div>
+        </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

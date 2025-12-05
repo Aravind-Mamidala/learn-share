@@ -30,23 +30,22 @@ const ReportUserModal = ({ isOpen, onClose, reportedUser, onSuccess }) => {
     setMessage("");
 
     try {
-      const response = await fetch(
-        "http://localhost:5001/api/complaints/submit",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            complainantId: user?.id,
-            reportedUserId: reportedUser._id,
-            complainantEmail: formData.complainantEmail,
-            subject: formData.subject,
-            description: formData.description,
-            category: formData.category,
-          }),
-        }
-      );
+      const API_BASE_URL =
+        import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+      const response = await fetch(`${API_BASE_URL}/api/complaints/submit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          complainantId: user?.id,
+          reportedUserId: reportedUser._id,
+          complainantEmail: formData.complainantEmail,
+          subject: formData.subject,
+          description: formData.description,
+          category: formData.category,
+        }),
+      });
 
       const data = await response.json();
 

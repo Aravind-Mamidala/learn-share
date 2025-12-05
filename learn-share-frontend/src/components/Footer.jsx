@@ -4,13 +4,13 @@ import { FaCcVisa, FaCcMastercard, FaCcAmazonPay, FaGooglePay } from "react-icon
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-10 pb-6">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <footer className="bg-gray-900 text-gray-300 pt-8 sm:pt-10 pb-4 sm:pb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
         
         {/* About Section */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-4">Learn & Share</h2>
-          <p className="text-gray-400 text-sm mb-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Learn & Share</h2>
+          <p className="text-gray-400 text-xs sm:text-sm mb-4">
             Your ultimate learning platform to explore Programming, AI, Web Development and more.
           </p>
           <div className="flex space-x-4 mt-4">
@@ -23,8 +23,8 @@ function Footer() {
 
         {/* Popular Categories */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Popular Categories</h3>
-          <ul className="space-y-2 text-sm">
+          <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3">Popular Categories</h3>
+          <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
             <li><a href="#" className="hover:text-white">Programming Languages</a></li>
             <li><a href="#" className="hover:text-white">Web Development</a></li>
             <li><a href="#" className="hover:text-white">AI & Machine Learning</a></li>
@@ -35,8 +35,8 @@ function Footer() {
 
         {/* Customer Support */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Customer Support</h3>
-          <ul className="space-y-2 text-sm">
+          <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3">Customer Support</h3>
+          <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
             <li><a href="#" className="hover:text-white">Help & FAQs</a></li>
             <li><a href="#" className="hover:text-white">Refund Policy</a></li>
             <li><a href="#" className="hover:text-white">Shipping Policy</a></li>
@@ -47,15 +47,15 @@ function Footer() {
 
         {/* Newsletter */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Stay Updated</h3>
-          <p className="text-gray-400 text-sm mb-3">Subscribe to our newsletter for the latest courses and offers.</p>
-          <div className="flex">
+          <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3">Stay Updated</h3>
+          <p className="text-gray-400 text-xs sm:text-sm mb-3">Subscribe to our newsletter for the latest courses and offers.</p>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
             <input
               type="email"
               placeholder="Enter your email"
-              className="p-2 rounded-l-md w-full text-black"
+              className="p-2 sm:p-2 rounded-md sm:rounded-l-md sm:rounded-r-none w-full text-black text-sm sm:text-base"
             />
-            <button className="bg-blue-600 px-4 rounded-r-md hover:bg-blue-700">Subscribe</button>
+            <button className="bg-blue-600 px-4 py-2 sm:py-2 rounded-md sm:rounded-r-md hover:bg-blue-700 text-sm sm:text-base whitespace-nowrap">Subscribe</button>
           </div>
         </div>
       </div>

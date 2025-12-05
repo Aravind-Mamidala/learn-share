@@ -43,24 +43,6 @@ app.use(
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// MongoDB
-// MongoDB Atlas
-const MONGO_URI = process.env.MONGO_URI;
-
-if (!MONGO_URI) {
-  console.error("❌ MONGO_URI is not defined in .env");
-  process.exit(1);
-}
-
-mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log("✅ MongoDB (Atlas) connected"))
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err.message);
-    process.exit(1);
-  });
-
-
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/teacher", teacherRoutes);
@@ -96,7 +78,7 @@ app.get("/api/skills", (req, res) => {
     "Photography",
     "Video Editing",
     "Content Creation",
-    "Business Development"
+    "Business Development",
   ]);
 });
 
@@ -110,7 +92,8 @@ const io = new Server(httpServer, {
       "http://localhost:5173",
       "http://localhost:5174",
       "http://localhost:5175",
-    ],
+      process.env.FRONTEND_URL, // for Vercel in production
+    ].filter(Boolean),
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -225,4 +208,23 @@ app.get("/api/teacher/by-email/:email", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5001;
-httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is not defined in .env");
+  process.exit(1);
+}
+
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log("✅ MongoDB (Atlas) connected");
+
+    httpServer.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err.message);
+    process.exit(1);
+  });
