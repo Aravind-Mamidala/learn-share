@@ -16,13 +16,38 @@ function Signup() {
       setMessage("Passwords do not match");
       return;
     }
+    setMessage(""); // Clear previous messages
     try {
       const res = await signupUser({ name, email, password });
-      setMessage(res.data.message || "User created successfully!");
-      // redirect to login after 1 sec
-      setTimeout(() => navigate("/login"), 1000);
+      if (res.data) {
+        setMessage(res.data.message || "User created successfully!");
+        // redirect to login after 1 sec
+        setTimeout(() => navigate("/login"), 1000);
+      } else {
+        setMessage("Invalid response from server");
+      }
     } catch (err) {
-      setMessage(err.response?.data?.message || "Signup failed");
+      console.error("Signup error:", err);
+      const API_BASE_URL =
+        import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+      console.log("API Base URL:", API_BASE_URL);
+
+      if (err.response) {
+        // Server responded with error status
+        const errorMessage =
+          err.response?.data?.message ||
+          err.response?.data?.error ||
+          `Signup failed (${err.response.status})`;
+        setMessage(errorMessage);
+      } else if (err.request) {
+        // Request was made but no response received
+        setMessage(
+          `Network error. Cannot reach server at ${API_BASE_URL}. Please check your connection and ensure the backend is running.`
+        );
+      } else {
+        // Something else happened
+        setMessage(err.message || "Signup failed. Please try again.");
+      }
     }
   };
 

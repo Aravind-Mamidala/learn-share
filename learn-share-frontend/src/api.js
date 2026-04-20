@@ -2,7 +2,20 @@ import axios from "axios";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
-export const API_BASE = `${API_BASE_URL}/api`; // ✅ must include /api
+
+// Remove trailing slash if present
+const cleanBaseURL = API_BASE_URL.replace(/\/$/, "");
+
+export const API_BASE = `${cleanBaseURL}/api`; // ✅ must include /api
+
+// Debug log (only in development)
+if (import.meta.env.DEV) {
+  console.log("🔧 API Configuration:", {
+    VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
+    API_BASE_URL: cleanBaseURL,
+    API_BASE: API_BASE,
+  });
+}
 
 // Create axios instance with base URL and auth interceptor
 export const api = axios.create({
